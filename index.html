@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FrameX - Giải pháp xây dựng thông minh: kết hợp tối ưu giữa thép tiền chế, cách nhiệt và chống thấm. Định hình không gian sống tương lai.">
+    <meta name="keywords" content="FrameX, thép tiền chế, cách nhiệt, chống thấm, xây dựng thông minh, nhà thép">
+    <meta name="author" content="FrameX">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="FrameX - Định hình không gian sống tương lai">
+    <meta property="og:description" content="Giải pháp xây dựng tích hợp: Thép tiền chế + Cách nhiệt + Chống thấm">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/og-image.jpg">
+    
+    <title>FrameX - Định hình không gian sống tương lai</title>
+    
+    <!-- Google Fonts (Async Load) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Styles -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+<body>
+    <!-- HEADER & NAVIGATION -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#home" class="nav__logo">
+                <img src="images/logo-light.webp" alt="FrameX Logo" class="nav__logo-img">
+            </a>
+            
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link">Trang Chủ</a></li>
+                    <li class="nav__item"><a href="#solution" class="nav__link">Giải Pháp</a></li>
+                    <li class="nav__item"><a href="#advantages" class="nav__link">Ưu Điểm</a></li>
+                    <li class="nav__item"><a href="#technology" class="nav__link">Công Nghệ</a></li>
+                    <li class="nav__item"><a href="#process" class="nav__link">Quy Trình</a></li>
+                    <li class="nav__item"><a href="tin-tuc.html" class="nav__link">Tin Tức</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link nav__link--cta">Liên Hệ</a></li>
+                    <li class="nav__item nav__lang-switcher">
+                        <div class="lang-dropdown">
+                            <button class="lang-dropdown__button">VI<svg class="lang-dropdown__arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                            <div class="lang-dropdown__menu">
+                                <a href="#" class="lang-dropdown__item lang-dropdown__item--active">VI</a>
+                                <a href="en/index.html" class="lang-dropdown__item">EN</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="nav__close" id="nav-close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </div>
+            </div>
+            
+            <div class="nav__toggle" id="nav-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+        
+        <!-- ========== HERO SECTION ========== -->
+        <!-- Hero Top: Background Image -->
+        <section class="hero-top" id="home">
+            <div class="hero-top__bg">
+                <picture>
+                    <source srcset="images/hero-building-5.webp" type="image/webp">
+                    <img src="images/hero-building-5.jpg" alt="FrameX Steel Building" loading="eager">
+                </picture>
+            </div>
+            <div class="hero-top__overlay"></div>
+            <div class="container">
+                <div class="hero-top__content">
+                    <div class="hero-top__box">
+                        <div class="hero-top__eyebrow">Tiên Phong Tại Việt Nam</div>
+                        <h1 class="hero-top__title">
+                            Xây dựng <span>thông minh</span> & bền vững
+                        </h1>
+                        <p class="hero-top__text">
+                            Kết cấu thép tiền chế kết hợp hệ thống cách nhiệt - chống thấm tích hợp. 
+                            Xây dựng nhanh, hiệu quả, thân thiện môi trường.
+                        </p>
+                        <div class="hero-top__buttons">
+                            <a href="#contact" class="btn btn--primary">Đặt lịch tư vấn miễn phí</a>
+                            <a href="#technology" class="btn btn--secondary">Xem portfolio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Bottom: Detailed Content -->
+        <section class="hero-bottom section">
+            <div class="container">
+                
+                <!-- Features -->
+                <div class="hero__features">
+                    <div class="hero__feature">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Lắp Dựng 7-10 Ngày</span>
+                    </div>
+                    <div class="hero__feature">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Tiết Kiệm 25-35% Điện</span>
+                    </div>
+                    <div class="hero__feature">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Chuẩn ISO 9001:2015</span>
+                    </div>
+                </div>
+                
+                <!-- Value Cards -->
+                <div class="hero__values">
+                    <div class="value-card">
+                        <div class="value-card__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        </div>
+                        <h3>Giải Pháp Tích Hợp Toàn Diện 3-IN-1</h3>
+                        <p>Thép tiền chế – Cách nhiệt – Chống thấm – Khả năng mở rộng linh hoạt</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-card__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        </div>
+                        <h3>Lắp Dựng Siêu Nhanh</h3>
+                        <p>Hoàn thiện khung chính chỉ 7-10 ngày</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-card__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3>QA/QC Nhà Máy</h3>
+                        <p>Gia công CNC ±2mm, kiểm soát chất lượng chuẩn ISO 9001:2015</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-card__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        </div>
+                        <h3>Quản Lý Tập Trung</h3>
+                        <p>Một đầu mối duy nhất, giảm thiểu rủi ro phối hợp</p>
+                    </div>
+                </div>
+                
+                <!-- Trust Badge -->
+                <div class="hero__trust">
+                    <p class="hero__trust-badge">
+                        <strong>Tiên Phong Tại Việt Nam</strong> - Giải Pháp Xây Dựng Tích Hợp Toàn Diện
+                    </p>
+                    <p class="hero__trust-text">
+                        Đối Tác Tin Cậy Của Nhiều Kiến Trúc Sư & Nhà Phát Triển
+                    </p>
+                </div>
+                
+                <!-- CTA Buttons -->
+                <div class="hero__cta">
+                    <a href="#contact" class="btn btn--primary btn--large">
+                        Đặt Lịch Tư Vấn Miễn Phí
+                    </a>
+                    <a href="#technology" class="btn btn--secondary">
+                        Xem Công Nghệ FrameX
+                    </a>
+                </div>
+                
+                <!-- Trust Signals -->
+                <div class="hero__signals">
+                    <div class="signal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Phản hồi trong 24h</span>
+                    </div>
+                    <div class="signal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Bảo mật thông tin</span>
+                    </div>
+                    <div class="signal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Tư vấn kỹ thuật miễn phí</span>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- ========== JOURNEY SELECTION ========== -->
+        <section class="journey section">
+            <div class="container">
+                <h2 class="section__title">Chọn Giải Pháp Phù Hợp Cho Bạn</h2>
+                <p class="section__subtitle">
+                    FrameX phục vụ đa dạng nhu cầu - từ gia đình tìm ngôi nhà mơ ước đến chuyên gia quan tâm công nghệ tiên tiến
+                </p>
+                
+                <div class="journey__paths">
+                    <div class="path-card">
+                        <div class="path-card__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        </div>
+                        <h3 class="path-card__title">Dành Cho Chủ Đầu Tư & Gia Chủ</h3>
+                        <p class="path-card__description">
+                            Kiến tạo không gian sống mơ ước với FrameX: Thi công nhanh, chi phí tối ưu, bền vững lâu dài
+                        </p>
+                        
+                        <ul class="path-card__benefits">
+                            <li>Rút ngắn 50-70% thời gian thi công so với xây truyền thống</li>
+                            <li>Thiết kế tối ưu năng lượng, giảm 25-35% chi phí điện hàng tháng</li>
+                            <li>Báo giá chi tiết minh bạch - Không phí ẩn</li>
+                            <li>Bảo hành 15 năm & hỗ trợ kỹ thuật dài hạn</li>
+                        </ul>
+                        
+                        <a href="#solution" class="btn btn--primary">Khởi Tạo Dự Án Mơ Ước</a>
+                    </div>
+                    
+                    <div class="path-card">
+                        <div class="path-card__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                        </div>
+                        <h3 class="path-card__title">Dành Cho KTS & Kỹ Sư</h3>
+                        <p class="path-card__description">
+                            Khám phá công nghệ tiên tiến của FrameX: Kỹ thuật vượt trội, tiêu chuẩn quốc tế, tích hợp hệ thống chuyên nghiệp
+                        </p>
+                        
+                        <ul class="path-card__benefits">
+                            <li>Thông số kỹ thuật chi tiết & dữ liệu thử nghiệm xác thực</li>
+                            <li>Case study & hồ sơ dự án hoàn thành</li>
+                            <li>Tích hợp BIM/Tekla & hỗ trợ thiết kế chuyên nghiệp</li>
+                            <li>Chương trình đào tạo & hội thảo kỹ thuật</li>
+                        </ul>
+                        
+                        <a href="#technology" class="btn btn--secondary">Truy Cập Tài Liệu Kỹ Thuật</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SOLUTION OVERVIEW ========== -->
+        <section class="solution section" id="solution">
+            <div class="container">
+                <h2 class="section__title">Giải Pháp Tích Hợp 3-IN-1 Của FrameX</h2>
+                <p class="section__subtitle">
+                    Hệ Thống Hoàn Chỉnh • Hiệu Suất Đã Kiểm Chứng • Công Nghệ Tiên Tiến
+                </p>
+                
+                <div class="solution__grid">
+                    <div class="solution-card">
+                        <div class="solution-card__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                            <h3>Nhanh Hơn</h3>
+                        </div>
+                        <p class="solution-card__main">
+                            <strong>Thép Q345B - Gia Công CNC ±2mm - Lắp Dựng 7-10 Ngày</strong>
+                        </p>
+                        <p class="solution-card__detail">
+                            Kết cấu thép tiền chế cường độ cao, tối ưu trọng lượng:
+                        </p>
+                        <ul class="solution-card__specs">
+                            <li>Vật liệu: Thép Q345B/Grade 50, mạ kẽm HDG Z275 chống ăn mòn</li>
+                            <li>Gia công: CNC precision với dung sai ±2mm, QA/QC chuẩn ISO</li>
+                            <li>Lắp dựng: Hoàn thiện khung chính chỉ 7-10 ngày</li>
+                            <li>Mở rộng: Thiết kế linh hoạt, dễ dàng mở rộng sau này</li>
+                            <li>Chuẩn: Tuân thủ AISC 360, BS/EN 1993, TCVN 5575</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <div class="solution-card__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg>
+                            <h3>Mát Hơn</h3>
+                        </div>
+                        <p class="solution-card__main">
+                            <strong>Tấm PIR EI30-EI120 - Giảm 25-35% Chi Phí Điện - Mát Hơn 4-6°C</strong>
+                        </p>
+                        <p class="solution-card__detail">
+                            Cách nhiệt từng vị trí (Tailored), tối ưu U-value, hiệu suất đã kiểm chứng:
+                        </p>
+                        <ul class="solution-card__specs">
+                            <li>Lõi PIR: Polyisocyanurate mật độ 40kg/m³, fire rating EI30-EI120</li>
+                            <li>Hiệu suất nhiệt: R-value 6.5-7.5 m²K/W, λ=0.022 W/mK</li>
+                            <li>Lợi ích: Nội thất mát hơn 4-6°C, tiết kiệm 25-35% tiền điện</li>
+                            <li>Cách nhiệt liên tục: Loại bỏ hoàn toàn cầu nhiệt</li>
+                            <li>Bền vững: Chống ẩm, chống UV, tuổi thọ cao</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <div class="solution-card__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            <h3>Đơn Giản Hơn</h3>
+                        </div>
+                        <p class="solution-card__main">
+                            <strong>Màng Chống thấm Chất Lượng Cao - Tuổi thọ tới 15 Năm - Chịu Chuyển Vị ±15mm</strong>
+                        </p>
+                        <p class="solution-card__detail">
+                            Chống thấm toàn diện, cam kết dài hạn:
+                        </p>
+                        <ul class="solution-card__specs">
+                            <li>Màng mái: SBS modified bitumen 4-5mm hoặc TPO/PVC đơn lớp</li>
+                            <li>Màng lỏng: PU/Polyurea seamless cho chi tiết phức tạp</li>
+                            <li>Chuyển vị: Chịu co giãn kết cấu lên đến ±15mm</li>
+                            <li>Kiểm tra: Water test 24-48h, pressure test trước nghiệm thu</li>
+                            <li>Cam kết: Bảo hành hiệu suất chống thấm 15 năm</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="solution-card">
+                        <div class="solution-card__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
+                            <h3>Sẵn Sàng Tương Lai</h3>
+                        </div>
+                        <p class="solution-card__main">
+                            Dễ tích hợp công nghệ thông minh, mở rộng linh hoạt theo nhu cầu
+                        </p>
+                        <p class="solution-card__detail">
+                            Kết cấu thép mở, dễ tích hợp hạ tầng kỹ thuật (M&E, IoT, BMS) và mở rộng sau này.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== WHY FRAMEX (ADVANTAGES) ========== -->
+        <section class="advantages section" id="advantages">
+            <div class="container">
+                <h2 class="section__title">Tại Sao Chọn FrameX?</h2>
+                <p class="section__subtitle">
+                    Lợi Thế Được Kiểm Chứng • Kết Quả Đo Lường Được • Giá Trị Bền Vững
+                </p>
+                
+                <div class="advantages__grid">
+                    <div class="advantage-card">
+                        <div class="advantage-card__number">01</div>
+                        <h3 class="advantage-card__title">Thi Công Siêu Nhanh - Rút Ngắn Thời Gian</h3>
+                        <p class="advantage-card__subtitle">
+                            Rút ngắn 50-70% thời gian so với xây dựng truyền thống
+                        </p>
+                        <ul class="advantage-card__list">
+                            <li>Gia công nhà máy song song với thi công móng</li>
+                            <li>Lắp dựng khung chính hoàn thiện chỉ 7-10 ngày</li>
+                            <li>Không phụ thuộc thời tiết - Đảm bảo tiến độ</li>
+                            <li>Tổng thời gian dự án: 8-10 tuần từ ký hợp đồng</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="advantage-card">
+                        <div class="advantage-card__number">02</div>
+                        <h3 class="advantage-card__title">Chất Lượng Ổn Định - QA/QC Nhà Máy</h3>
+                        <p class="advantage-card__subtitle">
+                            Gia công CNC ±2mm - Chuẩn ISO 9001:2015
+                        </p>
+                        <ul class="advantage-card__list">
+                            <li>Môi trường QA/QC nhà máy được kiểm soát - Không ảnh hưởng thời tiết/công trường</li>
+                            <li>Gia công CNC chính xác với dung sai ±2mm</li>
+                            <li>Kiểm tra chất lượng đa điểm trước xuất xưởng</li>
+                            <li>Quy trình sản xuất chứng nhận ISO 9001:2015</li>
+                            <li>Truy xuất nguồn gốc hoàn chỉnh từng linh kiện</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="advantage-card">
+                        <div class="advantage-card__number">03</div>
+                        <h3 class="advantage-card__title">Tiết Kiệm Năng Lượng Vượt Trội</h3>
+                        <p class="advantage-card__subtitle">
+                            Giảm 25-35% hóa đơn điện - Hiệu suất nhiệt đã kiểm chứng
+                        </p>
+                        <ul class="advantage-card__list">
+                            <li>Nội thất mát hơn 4-6°C - Thoải mái tự nhiên</li>
+                            <li>Giảm 25-35% chi phí điện hàng tháng - Có thể đo lường</li>
+                            <li>Cách nhiệt liên tục - Loại bỏ hoàn toàn cầu nhiệt</li>
+                            <li>Cách âm hiệu quả - Giảm tiếng ồn, tăng sự thoải mái</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== TECHNOLOGY ========== -->
+        <section class="technology section" id="technology">
+            <div class="container">
+                <h2 class="section__title">Công Nghệ FrameX: Sức Mạnh Từ Sự Tích Hợp</h2>
+                <p class="section__subtitle">
+                    Kỹ Thuật Vượt Trội • Hiệu Suất Đã Kiểm Chứng • Công Nghệ Tiên Tiến
+                </p>
+                
+                <div class="tech__modules">
+                    <div class="tech-module">
+                        <div class="tech-module__header">
+                            <div class="tech-module__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><path d="M17 17h.01"/></svg>
+                            </div>
+                            <h3>Hệ Thống Kết Cấu Thép Tiền Chế</h3>
+                        </div>
+                        <ul class="tech-module__list">
+                            <li><strong>Vật liệu:</strong> Thép Q345B (Fy=345MPa), mạ kẽm HDG Z275 chống ăn mòn</li>
+                            <li><strong>Thiết kế:</strong> Mô hình 3D BIM/Tekla, tối ưu hiệu quả vật liệu</li>
+                            <li><strong>Gia công:</strong> Cắt/khoan CNC, hàn tự động với dung sai ±2mm</li>
+                            <li><strong>Liên kết:</strong> Bulông cường độ cao Grade 8.8/10.9 lắp ráp nhanh</li>
+                            <li><strong>Tiêu chuẩn:</strong> AISC 360, BS EN 1993 (Eurocode 3), TCVN 5575</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-module">
+                        <div class="tech-module__header">
+                            <div class="tech-module__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg>
+                            </div>
+                            <h3>Cách Nhiệt PIR (Đề xuất chọn)</h3>
+                        </div>
+                        <ul class="tech-module__list">
+                            <li><strong>Lõi PIR:</strong> Polyisocyanurate mật độ 40kg/m³, fire rating EI30-EI120</li>
+                            <li><strong>Hiệu suất nhiệt:</strong> R-value 6.5-7.5 m²K/W, λ=0.022 W/mK</li>
+                            <li><strong>Kiểm tra:</strong> Chống cháy theo tiêu chuẩn BS EN 13501</li>
+                            <li><strong>Mặt ngoài:</strong> Thép 0.5mm (trong/ngoài), đa dạng màu sắc</li>
+                            <li><strong>Thi công:</strong> Cách nhiệt liên tục, loại bỏ hoàn toàn cầu nhiệt</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-module">
+                        <div class="tech-module__header">
+                            <div class="tech-module__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                            </div>
+                            <h3>Hệ Thống Chống Thấm Chuyên Nghiệp</h3>
+                        </div>
+                        <ul class="tech-module__list">
+                            <li><strong>Màng định hình:</strong> SBS modified bitumen 4-5mm hoặc TPO/PVC đơn lớp</li>
+                            <li><strong>Màng lỏng:</strong> Polyurethane (PU), Polyurea (PUR) ứng dụng seamless</li>
+                            <li><strong>Chuyển vị:</strong> Chịu co giãn kết cấu lên đến ±15mm</li>
+                            <li><strong>Kiểm tra:</strong> Water test 24-48h, kiểm tra trực quan toàn diện</li>
+                            <li><strong>Bảo hành:</strong> Cam kết hiệu suất màng chống thấm 15 năm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== TRUST & RELIABILITY ========== -->
+        <section class="trust section">
+            <div class="container">
+                <h2 class="section__title">FrameX: Uy Tín Từ Chất Lượng</h2>
+                <p class="section__subtitle">
+                    Quy Trình Chuẩn • Đảm Bảo Chất Lượng • Cam Kết Hiệu Suất
+                </p>
+                
+                <div class="trust__pillars">
+                    <div class="trust-pillar">
+                        <div class="trust-pillar__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3>QA/QC Nhà Máy Chuẩn ISO</h3>
+                        <p>Môi trường kiểm soát QA/QC tại nhà máy • Dung sai ±2mm • Quy trình được ghi chép • Kiểm tra đa điểm • Quy trình sản xuất được chứng nhận ISO 9001:2015</p>
+                    </div>
+                    
+                    <div class="trust-pillar">
+                        <div class="trust-pillar__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                        </div>
+                        <h3>Bảo Hành Hiệu Suất 15 Năm</h3>
+                        <p>Tính toàn vẹn chống thấm • Kiểm tra kín nước • Tích hợp hệ thống • Tài liệu chứng nhận đầy đủ • Tuân thủ tiến độ cam kết</p>
+                    </div>
+                    
+                    <div class="trust-pillar">
+                        <div class="trust-pillar__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+                        </div>
+                        <h3>Tiên Phong Công Nghệ</h3>
+                        <p>Tiên phong thị trường • Tích hợp công nghệ • Nền tảng kỹ thuật sâu • Thiết kế sẵn sàng cho tương lai • Chuẩn mực quốc tế</p>
+                    </div>
+                    
+                    <div class="trust-pillar">
+                        <div class="trust-pillar__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                        </div>
+                        <h3>Cải Tiến Liên Tục</h3>
+                        <p>Giám sát hiệu năng • Tối ưu hóa quy trình • Lấy thành công khách hàng làm trọng tâm • Tài liệu xuất sắc • Bảo hành cam kết lên đến 15 năm</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PROCESS (5 STEPS) ========== -->
+        <section class="process section" id="process">
+            <div class="container">
+                <h2 class="section__title">Quy Trình FrameX: 5 Bước Chuẩn</h2>
+                <p class="section__subtitle">
+                    Quy Trình Minh Bạch • Tiến Độ Đảm Bảo • Chất Lượng Đã Kiểm Chứng<br>
+                    <strong>Tổng thời gian: 8-10 tuần từ khi hợp đồng</strong>
+                </p>
+                
+                <div class="process__timeline">
+                    <div class="process-step">
+                        <div class="process-step__number">01</div>
+                        <div class="process-step__content">
+                            <h3 class="process-step__title">Khảo Sát & Thiết Kế Kỹ Thuật</h3>
+                            <p class="process-step__duration">1-2 tuần</p>
+                            <p class="process-step__description">
+                                Đánh giá công trường toàn diện • Thiết kế được tối ưu • Tiến độ chi tiết • Báo giá minh bạch • Cam kết hiệu suất
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-step__number">02</div>
+                        <div class="process-step__content">
+                            <h3 class="process-step__title">Sản Xuất Nhà Máy Chính Xác</h3>
+                            <p class="process-step__duration">2-3 tuần</p>
+                            <p class="process-step__description">
+                                Bản vẽ shop drawing, mô hình Tekla 3D • Mua sắm vật liệu Gr50/Q345B, HDG Z275 • Gia công CNC chính xác ±2mm, hàn tự động • QA/QC chuẩn ISO 9001:2015 • Sản xuất song song với công việc móng
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-step__number">03</div>
+                        <div class="process-step__content">
+                            <h3 class="process-step__title">Lắp Dựng Khung</h3>
+                            <p class="process-step__duration">7-10 ngày</p>
+                            <p class="process-step__description">
+                                Kiểm tra móng kết cấu → Lắp dựng khung chính → Lắp khung phụ → QC chất lượng lắp dựng. Chứng kiến tốc độ FrameX!
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-step__number">04</div>
+                        <div class="process-step__content">
+                            <h3 class="process-step__title">Tích Hợp Hệ Thống Hoàn Chỉnh</h3>
+                            <p class="process-step__duration">2-3 tuần</p>
+                            <p class="process-step__description">
+                                Lắp đặt tấm cách nhiệt • Thi công màng chống thấm • Water test 24-48h • Kiểm tra kỹ thuật toàn diện • Xác nhận hiệu suất đạt chuẩn
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-step__number">05</div>
+                        <div class="process-step__content">
+                            <h3 class="process-step__title">Nghiệm Thu & Bảo Hành 15 Năm</h3>
+                            <p class="process-step__duration">1 tuần</p>
+                            <p class="process-step__description">
+                                Khách hàng nghiệm thu & xác nhận hiệu suất • Bàn giao tài liệu kỹ thuật đầy đủ • Hướng dẫn vận hành & bảo trì • Cam kết bảo hành 15 năm • Hỗ trợ kỹ thuật dài hạn
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CONTACT FORM (CONVERSION PEAK) ========== -->
+        <section class="contact section" id="contact">
+            <div class="container">
+                <h2 class="section__title">Nhận Tư Vấn Kỹ Thuật Miễn Phí?</h2>
+                <p class="section__subtitle">
+                    Đăng ký tư vấn kỹ thuật ngay hôm nay - Kỹ sư FrameX sẽ liên hệ trong 24h
+                </p>
+                
+                <div class="contact__content">
+                    <div class="contact__benefits">
+                        <h3>Bạn Sẽ Nhận Được:</h3>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-item__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                            </div>
+                            <div class="benefit-item__content">
+                                <h4>Tư Vấn Thiết Kế Miễn Phí</h4>
+                                <p>Khảo sát & đánh giá kỹ thuật dự án, đề xuất giải pháp tối ưu</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-item__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                            </div>
+                            <div class="benefit-item__content">
+                                <h4>Báo Giá Chi Tiết & BOQ</h4>
+                                <p>Dự toán minh bạch với khối lượng công việc cụ thể, không phí ẩn</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-item__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                            </div>
+                            <div class="benefit-item__content">
+                                <h4>Phản Hồi Trong 24h</h4>
+                                <p>Kỹ sư tư vấn liên hệ trong 24h, hỗ trợ kỹ thuật ngay lập tức</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact__form-wrapper">
+                        <form class="contact__form" id="contact-form" action="https://formspree.io/f/mblzznya" method="POST">
+                            <h3>Đặt Lịch Tư Vấn Miễn Phí - 30 Phút</h3>
+                            
+                            <div class="form-group">
+                                <label for="name">Họ và tên *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="location">Vị Trí Dự Án</label>
+                                <input type="text" id="location" name="location" placeholder="Tỉnh/Thành phố">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-type">Loại Dự Án</label>
+                                <select id="project-type" name="project-type">
+                                    <option value="">-- Chọn loại dự án --</option>
+                                    <option value="biet-thu">Biệt thự</option>
+                                    <option value="nha-pho">Nhà phố</option>
+                                    <option value="toa-nha-thuong-mai">Tòa nhà thương mại</option>
+                                    <option value="kho-nha-xuong">Kho/Nhà xưởng</option>
+                                    <option value="khac">Khác</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="area">Diện Tích Dự Án (m²)</label>
+                                <input type="number" id="area" name="area" placeholder="VD: 200">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Tôi quan tâm đến (Chọn nhiều)</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="interests" value="ket-cau-thep">
+                                        <span>Kết cấu thép tiền chế (PEB)</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="interests" value="cach-nhiet-pir">
+                                        <span>Hệ thống cách nhiệt PIR</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="interests" value="chong-tham">
+                                        <span>Chống thấm chuyên nghiệp</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="interests" value="goi-tich-hop">
+                                        <span>Gói tích hợp 3-in-1</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Yêu Cầu Kỹ Thuật</label>
+                                <textarea id="message" name="message" rows="4" placeholder="Mô tả yêu cầu kỹ thuật của dự án..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn--primary btn--large btn--full">
+                                Nhận Tư Vấn Kỹ Thuật Ngay
+                            </button>
+                            
+                            <div class="form__guarantees">
+                                <p><strong>✓</strong> Tư vấn kỹ thuật 100% miễn phí - Không ràng buộc</p>
+                                <p><strong>✓</strong> Bảo mật thông tin tuyệt đối</p>
+                                <p><strong>✓</strong> Kỹ sư phản hồi trong 24h</p>
+                                <p><strong>✓</strong> Khảo sát thực địa miễn phí (nếu cần)</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- FAQ -->
+                <div class="faq">
+                    <h3 class="faq__title">Câu Hỏi Thường Gặp</h3>
+                    
+                    <div class="faq__items">
+                        <div class="faq-item">
+                            <div class="faq-item__question">
+                                <h4>Tư vấn có thực sự miễn phí 100% không?</h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="faq-item__answer">
+                                <p>Hoàn toàn miễn phí. Chúng tôi chỉ tính phí khi bạn quyết định tiến hành dự án xây dựng thực tế.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-item__question">
+                                <h4>Tôi có bị ràng buộc sử dụng dịch vụ sau tư vấn không?</h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="faq-item__answer">
+                                <p>Hoàn toàn không. Tư vấn giúp bạn hiểu các tùy chọn để đưa ra quyết định thông tin mà không có bất kỳ áp lực nào.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-item__question">
+                                <h4>FrameX có làm dự án nhỏ dưới 100m² không?</h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="faq-item__answer">
+                                <p>Chúng tôi đánh giá từng dự án riêng lẻ. Tối thiểu thường từ 80m² để đảm bảo hiệu quả chi phí của giải pháp tích hợp.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-item__question">
+                                <h4>PEB là gì và có những ưu điểm nào so với xây dựng truyền thống?</h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="faq-item__answer">
+                                <p>PEB (Pre-Engineered Building) là kết cấu thép được tối ưu thiết kế, gia công CNC tại nhà máy, lắp dựng tại công trường. Ưu điểm:<br>
+                                • Thi công siêu nhanh (khung chính 7-10 ngày)<br>
+                                • Chất lượng ổn định (gia công CNC ±2mm)<br>
+                                • Tiết kiệm thời gian 50-70% so với xây truyền thống<br>
+                                • Dễ mở rộng, bền vững, ít bảo trì<br>
+                                • Phù hợp đa dạng: nhà xưởng, kho bãi, showroom, văn phòng</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-item__question">
+                                <h4>Cách nhiệt và cách âm là gì? Khác nhau thế nào?</h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="faq-item__answer">
+                                <p>Cách nhiệt là khả năng hạn chế truyền nhiệt (nóng/lạnh) giữa các không gian, giúp giữ nhiệt độ ổn định và tiết kiệm năng lượng. Cách âm là khả năng giảm truyền âm thanh qua tường, trần, sàn để hạn chế tiếng ồn. Vật liệu có thể khác nhau: cách nhiệt thường dùng bông thủy tinh, PU/PIR, EPS; cách âm thường dùng bông khoáng, bông thủy tinh mật độ cao, xốp PE OPP, tấm tiêu âm. Một số vật liệu có thể vừa cách nhiệt vừa hỗ trợ cách âm, nhưng tiêu chí thiết kế và thi công cho mỗi mục đích là khác nhau.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-item__question">
+                                <h4>Chống thấm là gì và vì sao quan trọng trong công trình?</h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="faq-item__answer">
+                                <p>Chống thấm là tập hợp giải pháp, vật liệu và quy trình nhằm ngăn nước và hơi ẩm xâm nhập vào cấu kiện (mái, sàn, tường, tầng hầm, ban công…). Mục tiêu là bảo vệ kết cấu, tránh nứt, ẩm mốc, ăn mòn và suy giảm tuổi thọ. Giải pháp phổ biến: màng khò nóng/ tự dính, màng lỏng PU/PUA, xi măng tinh thể thẩm thấu, sơn chống thấm, băng keo/băng cản nước cho khe co giãn, hệ thoát nước và detailing chân tường, cổ ống. Thi công đúng quy trình (xử lý bề mặt, lớp lót, phủ đủ định mức, kiểm tra kín nước) và bảo trì định kỳ là yếu tố then chốt để đảm bảo hiệu quả lâu dài.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-item__question">
+                                <h4>Giải pháp FrameX có lợi thế gì nổi bật?</h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-icon"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <div class="faq-item__answer">
+                                <p>FrameX tích hợp 3-in-1: Kết cấu thép tiền chế + Giải pháp Cách nhiệt từng vị trí + Chống thấm chuyên nghiệp. Lợi thế vượt trội:<br>
+                                • Thi công siêu nhanh: Khung chính 7-10 ngày<br>
+                                • Chất lượng QA/QC: Gia công CNC ±2mm, chuẩn ISO 9001:2015<br>
+                                • Tiết kiệm năng lượng: Giảm 25-35% hóa đơn điện<br>
+                                • Quản lý tập trung: Một đầu mối duy nhất<br>
+                                • Bảo hành 15 năm: An tâm dài hạn</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <img src="images/logo-light.webp" alt="FrameX Logo" class="footer__logo">
+                    <p class="footer__tagline">Định hình không gian sống tương lai</p>
+                </div>
+                
+                <div class="footer__contact">
+                    <h4 class="footer__title">Thông Tin Liên Hệ</h4>
+                    <p class="footer__info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <a href="mailto:sales@framex.vn">sales@framex.vn</a>
+                    </p>
+                    <p class="footer__info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <a href="tel:+84909005683">+84 909 005 683</a>
+                    </p>
+                    <p class="footer__info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Phú Định, Quận 8, TP. Hồ Chí Minh
+                    </p>
+                </div>
+                
+                <div class="footer__social">
+                    <h4 class="footer__title">Theo Dõi FrameX</h4>
+                    <a href="https://3dwarehouse.sketchup.com/by/framexvn" target="_blank" rel="noopener" class="footer__social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                        3D Warehouse
+                    </a>
+                    <a href="#" target="_blank" rel="noopener" class="footer__social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        YouTube
+                    </a>
+                    <a href="https://www.pinterest.com/framexvn/" target="_blank" rel="noopener" class="footer__social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                        Pinterest
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2025 FrameX. Bản quyền thuộc về FrameX. Giải pháp xây dựng thông minh cho tương lai.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

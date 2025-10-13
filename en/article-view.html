@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Article - FrameX</title>
+    
+    <!-- Meta tags will be dynamically updated -->
+    <meta name="description" content="FrameX News" id="pageDescription">
+    
+    <!-- Google Fonts (Async Load) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    
+    <style>
+        .article-container {
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+        
+        .article-header {
+            margin-bottom: 2rem;
+        }
+        
+        .article-category {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #FF6B35;
+            color: white;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 2rem;
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .article-featured-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .article-excerpt {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-left: 4px solid #FF6B35;
+            border-radius: 5px;
+        }
+        
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .article-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content ul, 
+        .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .article-content blockquote {
+            margin: 2rem 0;
+            padding: 1rem 1.5rem;
+            background: #f9f9f9;
+            border-left: 4px solid #FF6B35;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .article-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: #FF6B35;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .back-button:hover {
+            background: #E55A25;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 100px 20px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 1.8rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .article-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .article-content h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER & NAVIGATION -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+                <img src="../images/logo-light.webp" alt="FrameX Logo" class="nav__logo-img">
+            </a>
+            
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html#home" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#solution" class="nav__link">Solution</a></li>
+                    <li class="nav__item"><a href="index.html#advantages" class="nav__link">Advantages</a></li>
+                    <li class="nav__item"><a href="index.html#technology" class="nav__link">Technology</a></li>
+                    <li class="nav__item"><a href="index.html#process" class="nav__link">Process</a></li>
+                    <li class="nav__item"><a href="news.html" class="nav__link nav__link--active">News</a></li>
+                    <li class="nav__item"><a href="index.html#contact" class="nav__link nav__link--cta">Contact</a></li>
+                    <li class="nav__item nav__lang-switcher">
+                        <div class="lang-dropdown">
+                            <button class="lang-dropdown__button">
+                                VI
+                                <svg class="lang-dropdown__arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="lang-dropdown__menu">
+                                <a href="../article-view.html" class="lang-dropdown__item">VI</a>
+                                <a href="article-view.html" class="lang-dropdown__item lang-dropdown__item--active">EN</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav__toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ARTICLE CONTENT -->
+    <div id="articleContainer">
+        <div class="loading">
+            <p>Loading article...</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <img src="../images/logo-light.webp" alt="FrameX Logo" class="footer__logo">
+                    <p class="footer__tagline">Shaping the future of living spaces</p>
+                </div>
+                
+                <div class="footer__contact">
+                    <h4 class="footer__title">Contact Information</h4>
+                    <p class="footer__info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <a href="mailto:sales@framex.vn">sales@framex.vn</a>
+                    </p>
+                    <p class="footer__info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <a href="tel:+84909005683">+84 909 005 683</a>
+                    </p>
+                    <p class="footer__info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Phu Dinh, District 8, Ho Chi Minh City
+                    </p>
+                </div>
+                
+                <div class="footer__social">
+                    <h4 class="footer__title">Follow FrameX</h4>
+                    <a href="https://3dwarehouse.sketchup.com/by/framexvn" target="_blank" rel="noopener" class="footer__social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                        3D Warehouse
+                    </a>
+                    <a href="#" target="_blank" rel="noopener" class="footer__social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        YouTube
+                    </a>
+                    <a href="https://www.pinterest.com/framexvn/" target="_blank" rel="noopener" class="footer__social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                        Pinterest
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2025 FrameX. All rights reserved. Smart construction solutions for the future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script>
+        // Get article ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id');
+        
+        // Update language switcher links with current article ID
+        if (articleId) {
+            const viLink = document.querySelector('.lang-dropdown__menu a[href*="../article-view"]');
+            if (viLink) {
+                viLink.href = `../article-view.html?id=${articleId}`;
+            }
+        }
+        
+        if (!articleId) {
+            showError('Article Not Found', 'Please go back to news page and select an article.');
+        } else {
+            loadArticle(articleId);
+        }
+        
+        async function loadArticle(id) {
+            try {
+                // Supabase Configuration
+                const SUPABASE_URL = 'https://lyctpwhdskgkqebzreib.supabase.co';
+                const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5Y3Rwd2hkc2tna3FlYnpyZWliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAzNjMyMzksImV4cCI6MjA3NTkzOTIzOX0.vQE07u5WYJIf8R5XqBfcEAcxygnRzy0n2_NetC9IhMk';
+                
+                // Supabase REST API endpoint
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/news_articles?id=eq.${id}&select=*`, {
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Cannot load article');
+                }
+                
+                const data = await response.json();
+                const article = data[0]; // Supabase returns array
+                
+                if (!article) {
+                    throw new Error('Article not found');
+                }
+                
+                displayArticle(article);
+            } catch (error) {
+                console.error('Error loading article:', error);
+                showError('Loading Error', 'Cannot load this article. Please try again later.');
+            }
+        }
+        
+        function displayArticle(article) {
+            // Update page title and meta
+            document.getElementById('pageTitle').textContent = article.title_en + ' - FrameX';
+            document.getElementById('pageDescription').setAttribute('content', article.excerpt_en);
+            
+            // Format date
+            const date = new Date(article.published_date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Build article HTML
+            const articleHTML = `
+                <div class="article-container">
+                    <div class="article-header">
+                        <span class="article-category">${article.category_en}</span>
+                        <h1 class="article-title">${article.title_en}</h1>
+                        <div class="article-meta">
+                            <div class="article-meta-item">
+                                <span>📅</span>
+                                <span>${date}</span>
+                            </div>
+                            <div class="article-meta-item">
+                                <span>✍️</span>
+                                <span>${article.author}</span>
+                            </div>
+                            <div class="article-meta-item">
+                                <span>⏱️</span>
+                                <span>${article.read_time} min read</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${article.featured_image ? `
+                        <img src="${article.featured_image}" alt="${article.title_en}" class="article-featured-image">
+                    ` : ''}
+                    
+                    <div class="article-excerpt">
+                        ${article.excerpt_en}
+                    </div>
+                    
+                    <div class="article-content">
+                        ${article.content_en}
+                    </div>
+                    
+                    <div class="article-footer">
+                        <a href="news.html" class="back-button">
+                            ← Back to News
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('articleContainer').innerHTML = articleHTML;
+        }
+        
+        function showError(title, message) {
+            const errorHTML = `
+                <div class="error">
+                    <h1 class="error-title">${title}</h1>
+                    <p class="error-message">${message}</p>
+                    <a href="news.html" class="back-button">
+                        ← Back to News
+                    </a>
+                </div>
+            `;
+            
+            document.getElementById('articleContainer').innerHTML = errorHTML;
+        }
+    </script>
+</body>
+</html>
