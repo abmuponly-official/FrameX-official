@@ -15,7 +15,7 @@ class AuthSystem {
         // Default credentials (SHOULD BE CHANGED!)
         this.DEFAULT_CREDENTIALS = {
             username: 'admin',
-            password: 'framex2024' // In production, use hashed passwords
+            password: 'Minhtue030120!@' // In production, use hashed passwords
         };
         
         // Activity tracking
