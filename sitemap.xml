@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Trang chủ -->
+  <url>
+    <loc>https://framex.vn/</loc>
+    <lastmod>2025-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://framex.vn/images/hero-building-5.webp</image:loc>
+      <image:title>FrameX - Kết cấu thép tiền chế</image:title>
+    </image:image>
+  </url>
+
+  <!-- Trang tin tức -->
+  <url>
+    <loc>https://framex.vn/tin-tuc.html</loc>
+    <lastmod>2025-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Trang xem bài viết -->
+  <url>
+    <loc>https://framex.vn/article-view.html</loc>
+    <lastmod>2025-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- English version -->
+  <url>
+    <loc>https://framex.vn/en/index.html</loc>
+    <lastmod>2025-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
