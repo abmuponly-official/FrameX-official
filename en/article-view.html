@@ -437,5 +437,110 @@
             document.getElementById('articleContainer').innerHTML = errorHTML;
         }
     </script>
+    
+    <!-- ==========================================
+         Article Schema Generator - INVISIBLE (EN)
+         Dynamically creates structured data for each article
+         ========================================== -->
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                // Get article data from page
+                const title = document.querySelector('.article-title')?.textContent || '';
+                const excerpt = document.querySelector('.article-excerpt')?.textContent?.trim() || '';
+                const authorText = document.querySelector('.article-meta-item:nth-child(1)')?.textContent || '';
+                const author = authorText.replace('Tác giả:', '').replace('Author:', '').trim() || 'FrameX Team';
+                const dateText = document.querySelector('.article-meta-item:nth-child(2)')?.textContent || '';
+                const date = dateText.replace('Ngày:', '').replace('Date:', '').trim() || new Date().toISOString().split('T')[0];
+                const category = document.querySelector('.article-category')?.textContent || 'News';
+                const featuredImage = document.querySelector('.article-featured-image')?.src || 'https://framex.vn/images/logo-light.webp';
+                const articleContent = document.querySelector('.article-content')?.textContent || '';
+                const wordCount = articleContent.split(/\s+/).length;
+                
+                // Get article ID from URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const articleId = urlParams.get('id');
+                
+                if (articleId && title) {
+                    // Create Article Schema
+                    const articleSchema = {
+                        "@context": "https://schema.org",
+                        "@type": "Article",
+                        "@id": `https://framex.vn/en/article-view.html?id=${articleId}#article`,
+                        "headline": title,
+                        "description": excerpt,
+                        "image": featuredImage,
+                        "datePublished": date,
+                        "dateModified": date,
+                        "author": {
+                            "@type": "Person",
+                            "name": author,
+                            "url": "https://framex.vn"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "FrameX Vietnam",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://framex.vn/images/logo-light.webp",
+                                "width": 200,
+                                "height": 60
+                            }
+                        },
+                        "mainEntityOfPage": {
+                            "@type": "WebPage",
+                            "@id": `https://framex.vn/en/article-view.html?id=${articleId}`
+                        },
+                        "articleSection": category,
+                        "wordCount": wordCount,
+                        "inLanguage": "en",
+                        "isAccessibleForFree": true
+                    };
+                    
+                    // Inject schema into page
+                    const script = document.createElement('script');
+                    script.type = 'application/ld+json';
+                    script.textContent = JSON.stringify(articleSchema);
+                    document.head.appendChild(script);
+                    
+                    console.log('✅ Article Schema injected (invisible to users)');
+                }
+            }, 1500); // Wait 1.5s for content to load
+        });
+    </script>
+    
+    <!-- ==========================================
+         Dynamic Hreflang Generator - INVISIBLE (EN)
+         Creates bilingual article links
+         ========================================== -->
+    <script>
+        // Get article ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id');
+        
+        if (articleId) {
+            // Create hreflang tags dynamically
+            const hreflangVI = document.createElement('link');
+            hreflangVI.rel = 'alternate';
+            hreflangVI.hreflang = 'vi';
+            hreflangVI.href = `https://framex.vn/article-view.html?id=${articleId}`;
+            
+            const hreflangEN = document.createElement('link');
+            hreflangEN.rel = 'alternate';
+            hreflangEN.hreflang = 'en';
+            hreflangEN.href = `https://framex.vn/en/article-view.html?id=${articleId}`;
+            
+            const hreflangDefault = document.createElement('link');
+            hreflangDefault.rel = 'alternate';
+            hreflangDefault.hreflang = 'x-default';
+            hreflangDefault.href = `https://framex.vn/article-view.html?id=${articleId}`;
+            
+            document.head.appendChild(hreflangVI);
+            document.head.appendChild(hreflangEN);
+            document.head.appendChild(hreflangDefault);
+            
+            console.log('✅ Hreflang tags injected for article:', articleId);
+        }
+    </script>
 </body>
 </html>
