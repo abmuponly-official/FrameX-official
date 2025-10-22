@@ -905,65 +905,76 @@
 
         // Load security recommendations and logs
         function loadSecurityData() {
-            // Display security recommendations
-            const recommendations = Auth.getSecurityRecommendations();
-            const container = document.getElementById('securityRecommendations');
+            console.log('🔍 Loading security data...');
             
-            if (recommendations.length === 0) {
-                container.innerHTML = '<p style="color: #28a745;"><i class="fas fa-check-circle"></i> Hệ thống bảo mật tốt!</p>';
-            } else {
-                container.innerHTML = recommendations.map(rec => {
-                    const colors = {
-                        critical: '#dc3545',
-                        high: '#fd7e14',
-                        medium: '#ffc107',
-                        low: '#17a2b8'
-                    };
-                    
-                    return `
-                        <div style="padding: 0.75rem; margin-bottom: 0.75rem; background: ${colors[rec.level]}15; border-left: 3px solid ${colors[rec.level]}; border-radius: 6px;">
-                            <strong style="color: ${colors[rec.level]};">
-                                <i class="fas ${rec.icon}"></i> ${rec.level.toUpperCase()}:
-                            </strong>
-                            ${rec.message}
-                        </div>
-                    `;
-                }).join('');
-            }
+            try {
+                // Display security recommendations
+                const recommendations = Auth.getSecurityRecommendations();
+                const container = document.getElementById('securityRecommendations');
+                console.log('📊 Security recommendations:', recommendations);
+                
+                if (recommendations.length === 0) {
+                    container.innerHTML = '<p style="color: #28a745;"><i class="fas fa-check-circle"></i> Hệ thống bảo mật tốt!</p>';
+                } else {
+                    container.innerHTML = recommendations.map(rec => {
+                        const colors = {
+                            critical: '#dc3545',
+                            high: '#fd7e14',
+                            medium: '#ffc107',
+                            low: '#17a2b8'
+                        };
+                        
+                        return `
+                            <div style="padding: 0.75rem; margin-bottom: 0.75rem; background: ${colors[rec.level]}15; border-left: 3px solid ${colors[rec.level]}; border-radius: 6px;">
+                                <strong style="color: ${colors[rec.level]};">
+                                    <i class="fas ${rec.icon}"></i> ${rec.level.toUpperCase()}:
+                                </strong>
+                                ${rec.message}
+                            </div>
+                        `;
+                    }).join('');
+                }
 
-            // Display activity logs
-            const logs = Auth.getActivityLogs();
-            const logsContainer = document.getElementById('activityLogs');
-            
-            if (logs.length === 0) {
-                logsContainer.innerHTML = '<p style="color: #6c757d; text-align: center; padding: 2rem;">Chưa có hoạt động nào được ghi nhận.</p>';
-            } else {
-                logsContainer.innerHTML = `
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <thead>
-                            <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
-                                <th style="padding: 0.75rem; text-align: left;">Thời Gian</th>
-                                <th style="padding: 0.75rem; text-align: left;">Hành Động</th>
-                                <th style="padding: 0.75rem; text-align: left;">Người Dùng</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${logs.slice(0, 50).map(log => `
-                                <tr style="border-bottom: 1px solid #f1f3f5;">
-                                    <td style="padding: 0.75rem; font-size: 0.875rem;">
-                                        ${new Date(log.timestamp).toLocaleString('vi-VN')}
-                                    </td>
-                                    <td style="padding: 0.75rem;">
-                                        ${getActionIcon(log.action)} ${getActionLabel(log.action)}
-                                    </td>
-                                    <td style="padding: 0.75rem;">
-                                        <strong>${log.username}</strong>
-                                    </td>
+                // Display activity logs
+                const logs = Auth.getActivityLogs();
+                const logsContainer = document.getElementById('activityLogs');
+                console.log('📝 Activity logs:', logs.length, 'entries');
+                
+                if (!logs || logs.length === 0) {
+                    logsContainer.innerHTML = '<p style="color: #6c757d; text-align: center; padding: 2rem;">Chưa có hoạt động nào được ghi nhận.</p>';
+                } else {
+                    logsContainer.innerHTML = `
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                                    <th style="padding: 0.75rem; text-align: left;">Thời Gian</th>
+                                    <th style="padding: 0.75rem; text-align: left;">Hành Động</th>
+                                    <th style="padding: 0.75rem; text-align: left;">Người Dùng</th>
                                 </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                `;
+                            </thead>
+                            <tbody>
+                                ${logs.slice(0, 50).map(log => `
+                                    <tr style="border-bottom: 1px solid #f1f3f5;">
+                                        <td style="padding: 0.75rem; font-size: 0.875rem;">
+                                            ${new Date(log.timestamp).toLocaleString('vi-VN')}
+                                        </td>
+                                        <td style="padding: 0.75rem;">
+                                            ${getActionIcon(log.action)} ${getActionLabel(log.action)}
+                                        </td>
+                                        <td style="padding: 0.75rem;">
+                                            <strong>${log.username || 'Unknown'}</strong>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                }
+                console.log('✅ Security data loaded successfully');
+            } catch (error) {
+                console.error('❌ Error loading security data:', error);
+                document.getElementById('activityLogs').innerHTML = 
+                    '<p style="color: #dc3545; text-align: center; padding: 2rem;">Lỗi tải dữ liệu: ' + error.message + '</p>';
             }
         }
 
@@ -974,7 +985,10 @@
                 login_failed: '<i class="fas fa-times-circle" style="color: #dc3545;"></i>',
                 create_article: '<i class="fas fa-plus-circle" style="color: #17a2b8;"></i>',
                 update_article: '<i class="fas fa-edit" style="color: #ffc107;"></i>',
-                delete_article: '<i class="fas fa-trash" style="color: #dc3545;"></i>'
+                delete_article: '<i class="fas fa-trash" style="color: #dc3545;"></i>',
+                database_backup: '<i class="fas fa-database" style="color: #28a745;"></i>',
+                articles_backup: '<i class="fas fa-newspaper" style="color: #17a2b8;"></i>',
+                media_backup: '<i class="fas fa-images" style="color: #6c757d;"></i>'
             };
             return icons[action] || '<i class="fas fa-info-circle"></i>';
         }
@@ -986,7 +1000,10 @@
                 login_failed: 'Đăng nhập thất bại',
                 create_article: 'Tạo bài viết',
                 update_article: 'Cập nhật bài viết',
-                delete_article: 'Xóa bài viết'
+                delete_article: 'Xóa bài viết',
+                database_backup: 'Backup toàn bộ database',
+                articles_backup: 'Backup tin tức',
+                media_backup: 'Backup media library'
             };
             return labels[action] || action;
         }
