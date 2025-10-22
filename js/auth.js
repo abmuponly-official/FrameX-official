@@ -366,10 +366,14 @@ class AuthSystem {
             });
         }
         
-        if (this.DEFAULT_CREDENTIALS.password === 'framex2024') {
+        // Check if using default hashed password
+        // Default password: framex2024
+        // Default hash: 1184da3414885edd1d4319b9ddbe78e46abbc33d5b444162f05e958fc3021bf1
+        if (this.HASHED_CREDENTIALS && 
+            this.HASHED_CREDENTIALS.passwordHash === '1184da3414885edd1d4319b9ddbe78e46abbc33d5b444162f05e958fc3021bf1') {
             recommendations.push({
                 level: 'high',
-                message: 'Đổi mật khẩu mặc định ngay lập tức',
+                message: 'Đổi mật khẩu mặc định ngay lập tức (framex2024)',
                 icon: 'fa-key'
             });
         }
