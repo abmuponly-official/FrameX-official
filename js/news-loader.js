@@ -97,11 +97,24 @@ class NewsLoader {
             
             const readTimeLabel = this.lang === 'vi' ? 'phút đọc' : 'min read';
 
-            // Featured image or icon - với fallback nếu ảnh lỗi
-            const fallbackIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><path d="M17 17h.01"/></svg>`;
-            const imageHTML = article.featured_image 
-                ? `<img src="${article.featured_image}" alt="${title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='${fallbackIcon}'">`
-                : fallbackIcon;
+            // Featured image with smart fallback system
+            // Priority: 1) Database image, 2) Category default image, 3) Gradient placeholder
+            const fallbackIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><path d="M17 17h.01"/></svg>`;
+            
+            // Detect if we're in EN folder
+            const pathPrefix = this.lang === 'en' ? '../' : '';
+            
+            // Map category to default image
+            const defaultImages = {
+                'cong-nghe': `${pathPrefix}images/news-defaults/cong-nghe.jpg`,
+                'du-an': `${pathPrefix}images/news-defaults/du-an.jpg`,
+                'huong-dan': `${pathPrefix}images/news-defaults/huong-dan.jpg`
+            };
+            
+            const defaultImage = defaultImages[article.category] || defaultImages['cong-nghe'];
+            const imageSource = article.featured_image || defaultImage;
+            
+            const imageHTML = `<img src="${imageSource}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='${defaultImage}';">`;
 
             return `
                 <article class="news-card" data-category="${article.category}">

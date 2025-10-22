@@ -5,6 +5,12 @@
 const SUPABASE_URL = 'https://lyctpwhdskgkqebzreib.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5Y3Rwd2hkc2tna3FlYnpyZWliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAzNjMyMzksImV4cCI6MjA3NTkzOTIzOX0.vQE07u5WYJIf8R5XqBfcEAcxygnRzy0n2_NetC9IhMk';
 
+// Initialize Supabase Storage Client
+let storageClient;
+if (typeof SupabaseStorageClient !== 'undefined') {
+    storageClient = new SupabaseStorageClient(SUPABASE_URL, SUPABASE_KEY);
+}
+
 let quillVi, quillEn;
 let currentArticleId = null;
 
@@ -476,14 +482,39 @@ async function loadMediaLibrary() {
                 const icon = isVideo ? 'fa-video' : 'fa-image';
                 const preview = isVideo ? 
                     `<div style="display: flex; align-items: center; justify-content: center; height: 150px; background: #f0f0f0;"><i class="fas ${icon}" style="font-size: 3rem; color: #999;"></i></div>` :
-                    `<img src="${media.url}" alt="${media.filename}">`;
+                    `<img src="${media.url}" alt="${media.filename}" loading="lazy">`;
+
+                const sizeKB = (media.size / 1024).toFixed(0);
+                const storagePath = media.storage_path || '';
 
                 return `
-                    <div class="media-item" data-url="${media.url}" onclick="selectMedia('${media.url}')">
-                        ${preview}
+                    <div class="media-item" data-url="${media.url}" data-id="${media.id}" data-path="${storagePath}">
+                        <div onclick="selectMedia('${media.url}', '${media.filename}')" style="cursor: pointer;">
+                            ${preview}
+                        </div>
                         <div class="media-item-info">
-                            <div><i class="fas ${icon}"></i> ${media.filename}</div>
-                            <div>${(media.size / 1024).toFixed(0)} KB</div>
+                            <div style="flex: 1; overflow: hidden;">
+                                <div style="font-size: 0.875rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <i class="fas ${icon}"></i> ${media.filename}
+                                </div>
+                                <div style="font-size: 0.75rem; color: #6c757d;">${sizeKB} KB</div>
+                            </div>
+                            <button onclick="deleteMedia(event, ${media.id}, '${storagePath}', '${media.filename}')" 
+                                style="
+                                    background: #dc3545;
+                                    color: white;
+                                    border: none;
+                                    padding: 0.4rem 0.6rem;
+                                    border-radius: 4px;
+                                    cursor: pointer;
+                                    font-size: 0.75rem;
+                                    transition: all 0.3s;
+                                " 
+                                onmouseover="this.style.background='#c82333'" 
+                                onmouseout="this.style.background='#dc3545'"
+                                title="Xóa ảnh">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </div>
                     </div>
                 `;
@@ -510,11 +541,125 @@ async function loadMediaLibrary() {
     }
 }
 
-// Select Media
-function selectMedia(url) {
-    document.getElementById('featuredImage').value = url;
-    showAlert('✅ Đã chọn ảnh!', 'success');
+// Select Media - Enhanced with preview
+function selectMedia(url, filename = '') {
+    const inputField = document.getElementById('featuredImage');
+    inputField.value = url;
+    
+    // Show image preview
+    showImagePreview(url);
+    
+    showAlert(`✅ Đã chọn ảnh: ${filename || 'Featured Image'}`, 'success');
     showView('editor');
+}
+
+// Show image preview in form
+function showImagePreview(url) {
+    // Find or create preview container
+    let previewContainer = document.getElementById('imagePreviewContainer');
+    
+    if (!previewContainer) {
+        const featuredImageInput = document.getElementById('featuredImage');
+        previewContainer = document.createElement('div');
+        previewContainer.id = 'imagePreviewContainer';
+        previewContainer.style.cssText = 'margin-top: 1rem;';
+        featuredImageInput.parentNode.appendChild(previewContainer);
+    }
+    
+    if (url) {
+        previewContainer.innerHTML = `
+            <div style="
+                border: 2px solid #e1e8ed;
+                border-radius: 8px;
+                padding: 0.5rem;
+                background: #f8f9fa;
+            ">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 0.5rem;
+                ">
+                    <span style="font-size: 0.875rem; font-weight: 600; color: #2c3e50;">
+                        <i class="fas fa-image"></i> Preview
+                    </span>
+                    <button type="button" onclick="clearImagePreview()" style="
+                        background: none;
+                        border: none;
+                        color: #dc3545;
+                        cursor: pointer;
+                        font-size: 0.875rem;
+                        padding: 0.25rem 0.5rem;
+                    ">
+                        <i class="fas fa-times"></i> Xóa
+                    </button>
+                </div>
+                <img src="${url}" alt="Preview" style="
+                    max-width: 100%;
+                    max-height: 200px;
+                    border-radius: 4px;
+                    display: block;
+                ">
+            </div>
+        `;
+    } else {
+        previewContainer.innerHTML = '';
+    }
+}
+
+// Clear image preview
+function clearImagePreview() {
+    document.getElementById('featuredImage').value = '';
+    const previewContainer = document.getElementById('imagePreviewContainer');
+    if (previewContainer) {
+        previewContainer.innerHTML = '';
+    }
+    showAlert('✅ Đã xóa ảnh', 'info');
+}
+
+// Delete media from storage and database
+async function deleteMedia(event, mediaId, storagePath, filename) {
+    event.stopPropagation(); // Prevent triggering selectMedia
+    
+    // Confirm deletion
+    const confirmed = confirm(
+        `Bạn có chắc muốn xóa ảnh này?\n\n` +
+        `File: ${filename}\n` +
+        `Lưu ý: Các bài viết đang dùng ảnh này sẽ bị ảnh hưởng.`
+    );
+    
+    if (!confirmed) return;
+    
+    try {
+        // Delete from Supabase Storage if path exists
+        if (storagePath && storageClient) {
+            const deleteResult = await storageClient.deleteFile(storagePath);
+            if (!deleteResult.success) {
+                console.warn('Could not delete from storage:', deleteResult.error);
+            }
+        }
+        
+        // Delete from database
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/media_library?id=eq.${mediaId}`, {
+            method: 'DELETE',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`
+            }
+        });
+        
+        if (response.ok) {
+            showAlert(`✅ Đã xóa: ${filename}`, 'success');
+            // Reload library
+            await loadMediaLibrary();
+        } else {
+            throw new Error('Delete from database failed');
+        }
+        
+    } catch (error) {
+        console.error('Delete media error:', error);
+        showAlert(`❌ Lỗi xóa ảnh: ${filename}`, 'danger');
+    }
 }
 
 // Upload Area
@@ -549,54 +694,147 @@ mediaUpload.addEventListener('change', (e) => {
     handleFileUpload(e.target.files);
 });
 
-// Handle File Upload
+// Handle File Upload - Phase 3: Full Implementation
 async function handleFileUpload(files) {
     if (!files || files.length === 0) return;
 
+    // Check if storage client is available
+    if (!storageClient) {
+        showAlert('❌ Storage client chưa được khởi tạo', 'danger');
+        return;
+    }
+
     for (const file of files) {
-        // Validate file
-        if (file.size > 10 * 1024 * 1024) {
-            showAlert(`❌ File "${file.name}" quá lớn (max 10MB)`, 'danger');
-            continue;
-        }
-
-        const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'video/mp4'];
-        if (!validTypes.includes(file.type)) {
-            showAlert(`❌ Định dạng file "${file.name}" không được hỗ trợ`, 'danger');
-            continue;
-        }
-
-        // Save to Supabase media_library table
-        // Note: For production, upload file to Supabase Storage first, then save URL
-        const mediaData = {
-            filename: file.name,
-            url: `images/${file.name}`, // Placeholder - would be actual Supabase Storage URL
-            type: file.type.startsWith('image') ? 'image' : 'video',
-            size: file.size
-        };
-
         try {
-            const response = await fetch(`${SUPABASE_URL}/rest/v1/media_library`, {
-                method: 'POST',
-                headers: { 
-                    'apikey': SUPABASE_KEY,
-                    'Authorization': `Bearer ${SUPABASE_KEY}`,
-                    'Content-Type': 'application/json',
-                    'Prefer': 'return=representation'
-                },
-                body: JSON.stringify(mediaData)
-            });
-
-            if (response.ok) {
-                showAlert(`✅ Upload thành công: ${file.name}`, 'success');
+            // Skip non-image files
+            if (!file.type.startsWith('image/')) {
+                showAlert(`❌ Chỉ hỗ trợ file ảnh: ${file.name}`, 'danger');
+                continue;
             }
+
+            // Option to resize large images
+            let fileToUpload = file;
+            if (file.size > 2 * 1024 * 1024) { // If larger than 2MB
+                const shouldResize = confirm(
+                    `File "${file.name}" có dung lượng ${(file.size / 1024 / 1024).toFixed(1)}MB.\n` +
+                    `Bạn có muốn tự động tối ưu để giảm dung lượng không?`
+                );
+                
+                if (shouldResize) {
+                    try {
+                        fileToUpload = await storageClient.resizeImage(file, 1200, 800);
+                        const savedSize = ((file.size - fileToUpload.size) / 1024 / 1024).toFixed(1);
+                        showAlert(`✅ Đã tối ưu: Tiết kiệm ${savedSize}MB`, 'success');
+                    } catch (resizeError) {
+                        console.warn('Resize failed, using original:', resizeError);
+                        fileToUpload = file;
+                    }
+                }
+            }
+
+            // Upload to Supabase Storage
+            const uploadResult = await storageClient.uploadFile(fileToUpload, 'news-images');
+
+            if (uploadResult.success) {
+                // Save metadata to database
+                const mediaData = {
+                    filename: uploadResult.filename,
+                    url: uploadResult.url,
+                    type: 'image',
+                    size: uploadResult.size,
+                    storage_path: uploadResult.path
+                };
+
+                const dbResponse = await fetch(`${SUPABASE_URL}/rest/v1/media_library`, {
+                    method: 'POST',
+                    headers: { 
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=representation'
+                    },
+                    body: JSON.stringify(mediaData)
+                });
+
+                if (dbResponse.ok) {
+                    const sizeKB = (uploadResult.size / 1024).toFixed(0);
+                    showAlert(`✅ Upload thành công: ${file.name} (${sizeKB}KB)`, 'success');
+                } else {
+                    showAlert(`⚠️ Ảnh đã upload nhưng lỗi lưu database`, 'warning');
+                }
+            } else {
+                showAlert(`❌ ${uploadResult.error}`, 'danger');
+            }
+
         } catch (error) {
             console.error('Upload error:', error);
             showAlert(`❌ Lỗi upload: ${file.name}`, 'danger');
         }
     }
 
-    loadMediaLibrary();
+    // Reload media library to show new uploads
+    await loadMediaLibrary();
+}
+
+// Show storage statistics
+async function showStorageStats() {
+    if (!storageClient) return;
+    
+    try {
+        const stats = await storageClient.getStorageStats();
+        
+        const statsHTML = `
+            <div style="
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 1rem;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+            ">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Storage Usage</div>
+                        <div style="font-size: 1.5rem; font-weight: 700;">${stats.totalSizeMB} MB</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Total Files</div>
+                        <div style="font-size: 1.5rem; font-weight: 700;">${stats.totalFiles}</div>
+                    </div>
+                </div>
+                <div style="
+                    margin-top: 0.75rem;
+                    padding-top: 0.75rem;
+                    border-top: 1px solid rgba(255,255,255,0.2);
+                    font-size: 0.75rem;
+                    opacity: 0.9;
+                ">
+                    <i class="fas fa-info-circle"></i> Free tier: 1GB storage limit
+                </div>
+            </div>
+        `;
+        
+        const mediaLibrary = document.getElementById('mediaLibrary');
+        if (mediaLibrary && !document.getElementById('storageStats')) {
+            const statsDiv = document.createElement('div');
+            statsDiv.id = 'storageStats';
+            mediaLibrary.parentNode.insertBefore(statsDiv, mediaLibrary);
+        }
+        
+        const statsContainer = document.getElementById('storageStats');
+        if (statsContainer) {
+            statsContainer.innerHTML = statsHTML;
+        }
+        
+    } catch (error) {
+        console.error('Error loading storage stats:', error);
+    }
+}
+
+// Enhanced loadMediaLibrary with stats
+const originalLoadMediaLibrary = loadMediaLibrary;
+async function loadMediaLibrary() {
+    await originalLoadMediaLibrary();
+    await showStorageStats();
 }
 
 // Initialize on page load
@@ -605,6 +843,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initLanguageTabs();
     showView('editor');
     
-    console.log('✅ FrameX News Management System initialized!');
-    console.log('📝 Sử dụng editor như Microsoft Word để viết bài');
+    // Show Phase 3 success message
+    if (storageClient) {
+        console.log('✅ FrameX News Management System initialized!');
+        console.log('📝 Sử dụng editor như Microsoft Word để viết bài');
+        console.log('🚀 Phase 3: Image Upload System - ACTIVE');
+        console.log('📸 Supabase Storage - CONNECTED');
+    } else {
+        console.warn('⚠️ Storage client not loaded - upload features disabled');
+    }
 });
