@@ -486,9 +486,14 @@ async function loadMediaLibrary() {
 
                 const sizeKB = (media.size / 1024).toFixed(0);
                 const storagePath = media.storage_path || '';
+                
+                // Escape attributes to prevent injection
+                const escapedFilename = media.filename.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+                const escapedUrl = media.url.replace(/"/g, '&quot;');
+                const escapedPath = storagePath.replace(/"/g, '&quot;');
 
                 return `
-                    <div class="media-item" data-url="${media.url}" data-id="${media.id}" data-path="${storagePath}">
+                    <div class="media-item" data-url="${escapedUrl}" data-id="${media.id}" data-path="${escapedPath}" data-filename="${escapedFilename}">
                         <div onclick="selectMedia('${media.url}', '${media.filename}')" style="cursor: pointer;">
                             ${preview}
                         </div>
@@ -499,7 +504,10 @@ async function loadMediaLibrary() {
                                 </div>
                                 <div style="font-size: 0.75rem; color: #6c757d;">${sizeKB} KB</div>
                             </div>
-                            <button onclick="deleteMedia(event, ${media.id}, '${storagePath}', '${media.filename}')" 
+                            <button class="delete-media-btn"
+                                data-media-id="${media.id}"
+                                data-storage-path="${escapedPath}"
+                                data-filename="${escapedFilename}"
                                 style="
                                     background: #dc3545;
                                     color: white;
@@ -521,6 +529,17 @@ async function loadMediaLibrary() {
             }).join('');
 
             container.innerHTML = `<div class="media-grid">${mediaHTML}</div>`;
+            
+            // Add event listeners to delete buttons
+            container.querySelectorAll('.delete-media-btn').forEach(btn => {
+                btn.addEventListener('click', async (event) => {
+                    event.stopPropagation();
+                    const mediaId = btn.dataset.mediaId;
+                    const storagePath = btn.dataset.storagePath;
+                    const filename = btn.dataset.filename;
+                    await deleteMedia(event, mediaId, storagePath, filename);
+                });
+            });
         } else {
             container.innerHTML = `
                 <div class="empty-state">
