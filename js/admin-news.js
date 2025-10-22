@@ -530,6 +530,10 @@ async function loadMediaLibrary() {
                 </div>
             `;
         }
+        
+        // Show storage stats after loading media
+        await showStorageStats();
+        
     } catch (error) {
         console.error('Error loading media:', error);
         container.innerHTML = `
@@ -830,12 +834,7 @@ async function showStorageStats() {
     }
 }
 
-// Enhanced loadMediaLibrary with stats
-const originalLoadMediaLibrary = loadMediaLibrary;
-async function loadMediaLibrary() {
-    await originalLoadMediaLibrary();
-    await showStorageStats();
-}
+// Storage stats are now integrated directly into loadMediaLibrary() function above
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
