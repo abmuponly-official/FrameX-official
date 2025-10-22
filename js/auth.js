@@ -12,10 +12,14 @@ class AuthSystem {
         this.SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
         this.REMEMBER_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days
         
-        // Default credentials (SHOULD BE CHANGED!)
-        this.DEFAULT_CREDENTIALS = {
+        // Hashed credentials (SHA-256)
+        // Password is hashed for security - cannot be reversed
+        // To change password: 
+        // 1. Run: echo -n "NEW_PASSWORD" | sha256sum
+        // 2. Replace passwordHash below
+        this.HASHED_CREDENTIALS = {
             username: 'admin',
-            password: 'Minhtue030120!@' // In production, use hashed passwords
+            passwordHash: '1184da3414885edd1d4319b9ddbe78e46abbc33d5b444162f05e958fc3021bf1' // SHA-256 hash
         };
         
         // Activity tracking
@@ -106,13 +110,28 @@ class AuthSystem {
     }
 
     /**
-     * Validate user credentials
+     * Validate user credentials with SHA-256 hashing
      */
-    validateCredentials(username, password) {
-        // In production, this should validate against a secure backend
-        // For now, we use default credentials
-        return username === this.DEFAULT_CREDENTIALS.username &&
-               password === this.DEFAULT_CREDENTIALS.password;
+    async validateCredentials(username, password) {
+        // Hash the input password using SHA-256
+        const passwordHash = await this.hashPassword(password);
+        
+        // Compare with stored hash
+        return username === this.HASHED_CREDENTIALS.username &&
+               passwordHash === this.HASHED_CREDENTIALS.passwordHash;
+    }
+    
+    /**
+     * Hash password using SHA-256
+     */
+    async hashPassword(password) {
+        // Use Web Crypto API for secure hashing
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex;
     }
 
     /**

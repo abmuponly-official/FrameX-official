@@ -1,0 +1,195 @@
+# =====================================================
+# FRAMEX WEBSITE - APACHE CONFIGURATION
+# Performance & Security Optimizations
+# =====================================================
+
+# Enable Rewrite Engine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+</IfModule>
+
+# =====================================================
+# BROWSER CACHING
+# Cache static assets for better performance
+# =====================================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Default expiration: 1 month
+    ExpiresDefault "access plus 1 month"
+    
+    # HTML files: 1 hour (content changes more frequently)
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # CSS files: 1 year
+    ExpiresByType text/css "access plus 1 year"
+    
+    # JavaScript files: 1 year
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    
+    # Images: 1 year
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Fonts: 1 year
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/eot "access plus 1 year"
+    
+    # JSON, XML: 1 hour
+    ExpiresByType application/json "access plus 1 hour"
+    ExpiresByType application/xml "access plus 1 hour"
+    ExpiresByType text/xml "access plus 1 hour"
+</IfModule>
+
+# Alternative cache control headers (if mod_expires not available)
+<IfModule mod_headers.c>
+    # Cache CSS, JS, and images for 1 year
+    <FilesMatch "\.(css|js|jpg|jpeg|png|webp|gif|svg|ico|woff2|woff|ttf|eot)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+    </FilesMatch>
+    
+    # Cache HTML for 1 hour
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=3600, public, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+# =====================================================
+# GZIP COMPRESSION
+# Compress files for faster transfer
+# =====================================================
+<IfModule mod_deflate.c>
+    # Compress HTML, CSS, JavaScript, Text, XML
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE image/svg+xml
+    
+    # Don't compress images (already compressed)
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|ico)$ no-gzip
+</IfModule>
+
+# =====================================================
+# SECURITY HEADERS
+# Protect against common web vulnerabilities
+# =====================================================
+<IfModule mod_headers.c>
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Prevent clickjacking attacks
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Enable XSS protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Referrer policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Permissions policy (disable unwanted features)
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    
+    # Remove server signature
+    Header unset Server
+    Header unset X-Powered-By
+</IfModule>
+
+# =====================================================
+# MIME TYPES
+# Ensure correct content types
+# =====================================================
+<IfModule mod_mime.c>
+    # JavaScript
+    AddType application/javascript js
+    AddType text/javascript js
+    
+    # CSS
+    AddType text/css css
+    
+    # Images
+    AddType image/webp webp
+    AddType image/svg+xml svg
+    
+    # Fonts
+    AddType font/woff2 woff2
+    AddType font/woff woff
+    AddType font/ttf ttf
+    AddType font/eot eot
+    
+    # JSON
+    AddType application/json json
+</IfModule>
+
+# =====================================================
+# DIRECTORY BROWSING
+# Disable directory listing for security
+# =====================================================
+Options -Indexes
+
+# =====================================================
+# ERROR DOCUMENTS (Optional)
+# Custom error pages
+# =====================================================
+# ErrorDocument 404 /404.html
+# ErrorDocument 500 /500.html
+
+# =====================================================
+# FORCE HTTPS (Enable after SSL setup)
+# Redirect all HTTP to HTTPS
+# =====================================================
+# <IfModule mod_rewrite.c>
+#     RewriteCond %{HTTPS} off
+#     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# =====================================================
+# PREVENT ACCESS TO SENSITIVE FILES
+# Block access to config and system files
+# =====================================================
+<FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|orig|psd|sh|sql|sw[op])|~)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Block access to git files
+<FilesMatch "^\.git">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# =====================================================
+# UTF-8 ENCODING
+# Ensure proper character encoding
+# =====================================================
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+    AddCharset UTF-8 .html .css .js .xml .json .txt
+</IfModule>
+
+# =====================================================
+# END OF CONFIGURATION
+# =====================================================
